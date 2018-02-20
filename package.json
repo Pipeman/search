@@ -1,0 +1,33 @@
+{
+  "name": "property-search",
+  "version": "1.0.0",
+  "description": "Create simple Node.js based application that simulates simple search for an area and displays search results. &nbsp;",
+  "main": "search.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node search.js",
+    "dev": "nodemon node search.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pipeman/search.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pipeman/search/issues"
+  },
+  "homepage": "https://github.com/Pipeman/search#readme",
+  "dependencies": {
+    "restify": "6.3.4"
+  },
+  "devDependencies": {
+    "chai": "4.1.2",
+    "chai-http": "3.0.0",
+    "mocha": "5.0.1",
+    "nodemon": "1.15.0"
+  }
+}
