@@ -2,14 +2,14 @@
   "name": "property-search",
   "version": "1.0.0",
   "description": "Create simple Node.js based application that simulates simple search for an area and displays search results. &nbsp;",
-  "main": "search.js",
+  "main": "propertySearchServer.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
     "test": "mocha",
-    "start": "node search.js",
-    "dev": "nodemon node search.js"
+    "start": "node propertySearchServer.js",
+    "dev": "nodemon node propertySearchServer.js"
   },
   "repository": {
     "type": "git",

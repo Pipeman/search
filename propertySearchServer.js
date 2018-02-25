@@ -1,4 +1,5 @@
 const restify = require("restify");
+const errors = require("restify-errors");
 const { getPropertyList, search } = require("./propertyActionService");
 
 const server = restify.createServer({
@@ -6,24 +7,38 @@ const server = restify.createServer({
   version: "0.0.1"
 });
 
-server.use(crossOrigin);
+server.use(allowCrossOrigin);
 server.use(restify.plugins.acceptParser(server.acceptable));
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 
 server.get("/search", function (req, res, next) {
-  res.send(search(req.query.q));
+  const searchResults = search(req.query.q);
+  if (!searchResults) {
+    return next(new errors.ResourceNotFoundError("cane"));
+  }
+
+  res.send(searchResults);
   
   return next();
 });
 
-server.get("/get-properties", function (req, res, next) {
+server.get("/results", function (req, res, next) {
   res.send(getPropertyList());
   
   return next();
 });
 
-function crossOrigin(req, res, next) {
+server.on("NotFound", (req, res, err, cb) => {
+  err.toJSON = () => ({
+      code: "WrongPath",
+      message: "Requested page not found",
+    });
+
+  return cb();
+});
+
+function allowCrossOrigin(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
 
